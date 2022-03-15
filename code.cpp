@@ -31,9 +31,9 @@ void dbgall(Head H, Tail... T) { cout << ' ' << H; dbgall(T...); }
 #define endl "\n"
 
 #define flush cout.flush()
-#define clz(n) __builtin_clz(n)
-#define ctz(n) __builtin_ctz(n)
-#define csb(n) __builtin_popcount(n)
+#define clz(n) __builtin_clzll(n)
+#define ctz(n) __builtin_ctzll(n)
+#define csb(n) __builtin_popcountll(n)
 #define cb(n) floor(log2(n)) + 1
 #define vi vector<int>
 #define vb vector<bool>
@@ -42,7 +42,8 @@ void dbgall(Head H, Tail... T) { cout << ' ' << H; dbgall(T...); }
 #define pll pair<ll, ll>
 #define all(arr) arr.begin(), arr.end()
 #define search(mp, n) !!(mp.find(n) != mp.end())
-#define rep(i,a,b)  for(ll i=a;i<b;i++)
+#define rep(i, a, b)  for (ll i = a; i < b; i++)
+#define iter(it, con)  for (auto it=con.begin(); it!=con.end(); it++)
 
 void setio() {
 #ifndef ONLINE_JUDGE
@@ -56,41 +57,9 @@ signed main() {
 	io;
 	setio();
 
-	ll n, m, r, x, y;
-	cin >> n >> m >> r >> x >> y;
-
-	vector<vector<pll>> adj(n + 1);
-	ll u, v, w;
-	rep(i, 0, r) {
-		cin >> u >> v >> w;
-		adj[u].push_back({w, v});
-		adj[v].push_back({w, u});
-	}
-
-	vll vis(n + 1, false);
-	vll dist(n + 1, linf);
-
-	dist[x] = 0;
-
-	set<pll> nodes;
-	nodes.insert({0, x});
-	while (!nodes.empty()) {
-		u = (*nodes.begin()).second;
-		nodes.erase(nodes.begin());
-		vis[u] = true;
-		for (auto edge : adj[u]) {
-			if (!vis[edge.second] and dist[u] != linf and
-			        dist[u] + edge.first < dist[edge.second]) {
-				dist[edge.second] = dist[u] + edge.first;
-				nodes.insert({dist[edge.second], edge.second});
-			}
-		}
-	}
-
-	if (dist[y] <= m) {
-		cout << "alive " << dist[y] << endl;
-	} else {
-		cout << "died" << endl;
+	tc{
+		ll n;
+		cin >> n;
 	}
 
 	clock_t p_end = clock();

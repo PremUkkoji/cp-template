@@ -52,9 +52,9 @@ struct custom_hash {
 #define endl "\n"
 
 #define flush cout.flush()
-#define clz(n) __builtin_clz(n)
-#define ctz(n) __builtin_ctz(n)
-#define csb(n) __builtin_popcount(n)
+#define clz(n) __builtin_clzll(n)
+#define ctz(n) __builtin_ctzll(n)
+#define csb(n) __builtin_popcountll(n)
 #define cb(n) floor(log2(n)) + 1
 #define vi vector<int>
 #define vb vector<bool>
@@ -63,7 +63,8 @@ struct custom_hash {
 #define pll pair<ll, ll>
 #define all(arr) arr.begin(), arr.end()
 #define search(mp, n) !!(mp.find(n) != mp.end())
-#define rep(i,a,b)  for(ll i=a;i<b;i++)
+#define rep(i, a, b)  for (ll i = a; i < b; i++)
+#define iter(it, con)  for (auto it=con.begin(); it!=con.end(); it++)
 
 // bit manipulation
 #define BIT_SET(a,b) ((a) |= (1ULL<<(b)))
@@ -149,6 +150,21 @@ string dec_to_any(ll n, ll base) {
 	}
 	reverse(all(converted));
 	return converted;
+}
+
+// precomputing phi using division sum property
+const ll PHIMAX = 1e6 + 5;
+vll phi(PHIMAX);
+void precompute_phi() {
+	phi[1] = 1;
+	for (ll i = 2; i < PHIMAX; i++) {
+		phi[i] = i - 1;
+	}
+	for (ll i = 2; i < PHIMAX; i++) {
+		for (ll j = 2 * i; j < PHIMAX; j += i) {
+			phi[j] -= phi[i];
+		}
+	}
 }
 
 // prime numbers using sieve of eratosthenes
@@ -273,6 +289,26 @@ void fact_invfact() {
 		invfact[i] = invfact[i - 1] * modInverse(i, MOD);
 		if (invfact[i] >= MOD) {
 			invfact[i] = invfact[i] % MOD;
+		}
+	}
+}
+
+// dijkstras algorithm for SSSP
+void dijkstras(ll src, vll& dist, vector<vector<pll>>& adj, ll n) {
+	vb vis(n + 1, false);
+	dist[src] = 0;
+
+	priority_queue<pll, vector<pll>, greater<pll>> nodes;
+	nodes.push({0, src});
+	while (!nodes.empty()) {
+		ll u = nodes.top().second;
+		nodes.pop();
+		vis[u] = true;
+		for (auto edge : adj[u]) {
+			if (!vis[edge.second] and dist[u] + edge.first < dist[edge.second]) {
+				dist[edge.second] = dist[u] + edge.first;
+				nodes.push({dist[edge.second], edge.second});
+			}
 		}
 	}
 }
