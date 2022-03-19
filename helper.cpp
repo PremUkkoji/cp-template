@@ -201,12 +201,25 @@ unordered_map<ll, ll> getPrimeFactors(ll n) {
 }
 
 // prime factors of numbers in nlogn time
-const int PFMAX = 1e7 + 8;
-vector< unordered_map<ll, ll> > prime_factors(PFMAX);
+const int PFCMAX = 1e7 + 8;
+vector< unordered_map<ll, ll> > prime_factors_cnt(PFCMAX);
+void precompute_prime_factors_cnt() {
+	for (int i = 2; i < PFCMAX; i++) {
+		unordered_map<ll, ll> mp = getPrimeFactors(i);
+		prime_factors_cnt[i] = mp;
+	}
+}
+
+// prime factors of numberes in nlogn time without using sieve
+const int PFMAX = 1e6 + 1;
+vi prime_factors[PFMAX];
 void precompute_prime_factors() {
 	for (int i = 2; i < PFMAX; i++) {
-		unordered_map<ll, ll> mp = getPrimeFactors(i);
-		prime_factors[i] = mp;
+		if (prime_factors[i].size() == 0) {
+			for (int j = i; j < PFMAX; j += i) {
+				prime_factors[j].push_back(i);
+			}
+		}
 	}
 }
 
