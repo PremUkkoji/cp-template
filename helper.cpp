@@ -55,6 +55,7 @@ struct custom_hash {
 #define clz(n) __builtin_clzll(n)
 #define ctz(n) __builtin_ctzll(n)
 #define csb(n) __builtin_popcountll(n)
+#define msb(n) floor(log2(n))
 #define cb(n) floor(log2(n)) + 1
 #define vi vector<int>
 #define vb vector<bool>
