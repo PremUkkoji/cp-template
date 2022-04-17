@@ -22,46 +22,31 @@ typedef priority_queue<ll, vector<ll>, greater<ll>> min_heap;
 void dbgall() { cout << endl; }
 template<typename Head, typename... Tail>
 void dbgall(Head H, Tail... T) { cout << ' ' << H; dbgall(T...); }
+#define dbg1d(arr) for(auto ele: arr){cout<<ele<<" ";}cout<<"\n";
 #define dbg2d(arr) for(ll i=0;i<arr.size();i++){for(ll j=0;j<arr[i].size();j++){cout<<arr[i][j]<<" ";}cout<<"\n";}cout<<"\n";
-#define dbg1d(arr) for(ll i=0;i<arr.size();i++){cout<<arr[i]<<" ";}cout<<"\n";
 
-#define read1D(arr) for(auto &ele: arr){cin>>ele;}
-
-// custom hash function
-struct custom_hash {
-	static uint64_t splitmix64(uint64_t x) {
-		x += 0x9e3779b97f4a7c15;
-		x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-		x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-		return x ^ (x >> 31);
-	}
-
-	size_t operator()(uint64_t x) const {
-		static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-		return splitmix64(x + FIXED_RANDOM);
-	}
-};
-
-// shortcuts
+// reading input
 #define io ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
 #define tc ll T;cin>>T;while(T--)
-#define inf INT_MAX
-#define linf LLONG_MAX
+#define read1D(arr) for(auto &ele: arr){cin>>ele;}
+#define read2D(arr) for(auto &row: arr){for(auto &ele: row){cin>>ele;}}
+
+// shortcuts
 #define MOD 1000000007
 #define PI 3.141592653589793
 #define endl "\n"
-
-#define flush cout.flush()
+#define pii pair<int, int>
+#define pll pair<ll, ll>
+#define vi vector<int>
+#define vb vector<bool>
+#define vll vector<ll>
+#define vvll vector<vector<ll>>
+#define vvpll vector<vector<pll>>
 #define clz(n) __builtin_clzll(n)
 #define ctz(n) __builtin_ctzll(n)
 #define csb(n) __builtin_popcountll(n)
 #define msb(n) floor(log2(n))
 #define cb(n) floor(log2(n)) + 1
-#define vi vector<int>
-#define vb vector<bool>
-#define vll vector<ll>
-#define pii pair<int, int>
-#define pll pair<ll, ll>
 #define all(arr) arr.begin(), arr.end()
 #define search(mp, n) !!(mp.find(n) != mp.end())
 #define rep(i, a, b)  for (ll i = a; i < b; i++)
@@ -78,6 +63,21 @@ struct custom_hash {
 #define BITMASK_FLIP(x, mask) ((x) ^= (mask))
 #define BITMASK_CHECK_ALL(x, mask) (!(~(x) & (mask)))
 #define BITMASK_CHECK_ANY(x, mask) ((x) & (mask))
+
+// custom hash function
+struct custom_hash {
+	static uint64_t splitmix64(uint64_t x) {
+		x += 0x9e3779b97f4a7c15;
+		x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+		x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+		return x ^ (x >> 31);
+	}
+
+	size_t operator()(uint64_t x) const {
+		static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+		return splitmix64(x + FIXED_RANDOM);
+	}
+};
 
 // binary exponentiation
 ll bin_exp(ll base, ll exp, ll mod) {
