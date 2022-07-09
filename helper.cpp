@@ -168,7 +168,7 @@ void precompute_phi() {
 	}
 }
 
-// prime numbers using sieve of eratosthenes
+// prime numbers using sieve of eratosthenes in n*log(log(n)) TC
 const int PMAX = 1e7 + 8;
 bool prime[PMAX];
 int spf[PMAX];
