@@ -348,6 +348,6 @@ signed main() {
 	}
 
 	clock_t p_end = clock();
-	cerr << "Time : " << (double)(p_end - p_start) / (double)CLOCKS_PER_SEC << " sec  ";
+	cerr << "Time : " << fixed << setprecision(10) << (double)(p_end - p_start) / (double)CLOCKS_PER_SEC << " sec  ";
 	return 0;
 }
