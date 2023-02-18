@@ -46,6 +46,7 @@ void dbgall(Head H, Tail... T) { cout << ' ' << H; dbgall(T...); }
 #define ctz(n) __builtin_ctzll(n)
 #define csb(n) __builtin_popcountll(n)
 #define msb(n) floor(log2(n))
+#define isPow2(n) (n && (!(n & (n - 1))))
 #define cb(n) floor(log2(n)) + 1
 #define all(arr) arr.begin(), arr.end()
 #define search(mp, n) !!(mp.find(n) != mp.end())
@@ -246,7 +247,7 @@ ll triangle_level(ll n) {
 }
 
 // next greater element in array O(n)
-// function returns indexes of next greater element in the array
+// function returns indexes(0-based) of next greater element in the array
 vll nextGreaterElement(vll arr) {
 	ll n = arr.size();
 	vll res(n);

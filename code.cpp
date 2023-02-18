@@ -38,7 +38,7 @@ void dbgall(Head H, Tail... T) { cout << ' ' << H; dbgall(T...); }
 #define ctz(n) __builtin_ctzll(n)
 #define csb(n) __builtin_popcountll(n)
 #define msb(n) floor(log2(n))
-#define isPow2(n) (x && (!(x & (x - 1))))
+#define isPow2(n) (n && (!(n & (n - 1))))
 #define cb(n) floor(log2(n)) + 1
 #define all(arr) arr.begin(), arr.end()
 #define search(con, n) !!(con.find(n) != con.end())
@@ -54,14 +54,12 @@ void setio() {
 }
 
 void solve() {
-    ll T;
+    ll T = 1;
     cin >> T;
 
-    while(T--){
+    for(ll t=1;t<=T;t++){
         ll n;
         cin >> n;
-        
-        cout << n << endl;
     }
 }
 
